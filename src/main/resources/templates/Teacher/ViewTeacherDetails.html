@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Details | Student Management System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/teacher.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<div class="main-wrapper">
+
+    <main class="page-content">
+
+        <!-- Page Heading -->
+        <div class="page-heading">
+
+            <div>
+                <h3>
+                    <i class="bi bi-person-vcard-fill"></i>
+                    Teacher Details </h3>
+
+                <p>View teacher information</p>
+            </div>
+
+            <a th:href="@{/teacher/teacherList}" class="back-button">
+                <i class="bi bi-arrow-left"></i>
+                Back to Teacher
+            </a>
+
+        </div>
+
+
+        <!-- Teacher Details Card -->
+        <div class="teacher-details-card">
+
+            <!-- Profile Header -->
+            <div class="teacher-details-header">
+
+                <div class="details-profile-icon">
+                    <span th:text="${#strings.substring(teacher.name, 0, 1).toUpperCase()}">
+                        T
+                    </span>
+                </div>
+
+                <div>
+                    <h5 th:text="${teacher.name}">
+                        Teacher Name </h5>
+
+                    <p>Teacher Information </p>
+                </div>
+
+                <a th:href="@{'/teacher/' + ${teacher.id} + '/subjects'}" class="teacher-subjects-button">
+                    <i class="bi bi-book-fill"></i> Subjects
+                </a>
+
+            </div>
+
+
+            <!-- Teacher Information -->
+            <div class="teacher-details-body">
+
+                <!-- Name -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Teacher Name
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.name}">
+                            Teacher Name
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Email
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.email}">
+                            teacher@email.com
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Phone
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.phoneNumber}">
+                            9800000000
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Address
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.address}">
+                            Kathmandu, Nepal
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Gender -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-gender-ambiguous"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Gender
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.gender}">
+                            Male
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Qualification -->
+                <div class="detail-item">
+
+                    <div class="detail-icon">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span class="detail-label">
+                            Qualification
+                        </span>
+
+                        <span class="detail-value" th:text="${teacher.qualification}">
+                            Master's Degree
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="teacher-details-actions">
+
+                <a th:href="@{/teacher/editTeacher/{id}(id=${teacher.id})}" class="details-edit-button">
+
+                    <i class="bi bi-pencil-square"></i>
+                    Edit Teacher
+
+                </a>
+
+                <a th:href="@{/teacher/teacherList}" class="details-back-button">
+
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Teacher
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+

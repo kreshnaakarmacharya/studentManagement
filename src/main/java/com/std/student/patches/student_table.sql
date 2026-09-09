@@ -1,10 +1,10 @@
-CREATE TABLE std_management.student(
-    id BIGINT AUTO_INCREMENT,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    address VARCHAR(100),
-    math_marks FLOAT,
-    social_marks FLOAT,
-    total_marks FLOAT,
-    PRIMARY KEY(id)
+CREATE TABLE student (
+                         id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                         std_code VARCHAR(255) NOT NULL UNIQUE,
+                         NAME VARCHAR(255) NOT NULL,
+                         email VARCHAR(255) NOT NULL,
+                         phone_number VARCHAR(255) NOT NULL,
+                         address VARCHAR(255) NOT NULL,
+                         gender VARCHAR(255) NOT NULL,
+                         course VARCHAR(255) NOT NULL
 );

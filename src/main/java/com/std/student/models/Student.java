@@ -1,6 +1,9 @@
 package com.std.student.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -17,23 +20,31 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
+    @Column(name = "std_code",  unique = true, nullable = false)
+    private String stdCode;
+
+    @NotEmpty
     @Column(name = "name")
     private String name;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please enter a valid email address")
     @Column(name = "email")
     private String email;
 
+    @NotEmpty
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    
     @Column(name = "address")
     private String address;
 
-    @Column(name = "math_marks")
-    private float mathMarks;
+    @Column(name = "gender")
+    private String gender;
 
-    @Column(name = "social_marks")
-    private float socialMarks;
+    @Column(name = "course")
+    private String course;
 
-    @Column(name = "total_marks")
-    private float totalMarks;
 }

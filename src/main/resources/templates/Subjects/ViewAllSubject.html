@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subjects | Student Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/subject.css}">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+
+<!-- Main Content -->
+<div class="main-wrapper">
+
+    <main class="page-content">
+
+
+        <!-- Page Heading -->
+        <div class="page-heading">
+            <div>
+                <h3>
+                    <i class="bi bi-book-fill"></i>
+                    Subjects List </h3>
+
+                <p>
+                    Manage subjects for
+                    <strong th:text="${course.courseName}">Course Name</strong>
+                </p>
+            </div>
+
+
+            <a th:href="@{/subjects/addSubjectForm(courseId=${courseId})}" class="subject-add-button">
+
+                <i class="bi bi-plus-lg"></i>
+                Add Subject
+
+            </a>
+
+        </div>
+
+
+        <!-- Subject List Card -->
+        <div class="subject-list-card">
+
+
+            <!-- Card Header -->
+            <div class="subject-list-header">
+
+                <div>
+
+                    <h5>All Subjects</h5>
+
+                    <p>
+                        Total Subjects:
+                        <strong th:text="${#lists.size(subjects)}">0</strong>
+                    </p>
+
+                </div>
+
+
+                <!-- Search -->
+                <div class="subject-search">
+
+                    <i class="bi bi-search"></i>
+
+                    <input type="text" id="subjectSearch" placeholder="Search subjects...">
+
+                </div>
+
+            </div>
+
+
+            <!-- Table -->
+            <div class="table-responsive">
+
+                <table class="subject-list-table" id="subjectTable">
+
+                    <thead>
+
+                    <tr>
+
+                        <th class="text-center" style="width: 50px;">
+                            #
+                        </th>
+
+                        <th>
+                            Subject
+                        </th>
+
+                        <th>
+                            Subject Code
+                        </th>
+
+                        <th>
+                            Semester
+                        </th>
+
+                        <th class="text-center" style="width: 120px;">
+                            Actions
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    <!-- Subject Data -->
+                    <tr th:each="subject, stat : ${subjects}" class="subject-row">
+
+
+                        <!-- Number -->
+                        <td class="text-center" th:text="${stat.count}">
+                            1
+                        </td>
+
+
+                        <!-- Subject -->
+                        <td>
+
+                            <div class="subject-info">
+
+                                <div class="subject-avatar">
+
+                                    <span th:text="${#strings.substring(subject.subjectName, 0, 1).toUpperCase()}">
+                                        S
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="subject-name" th:text="${subject.subjectName}">
+                                        Subject Name
+                                    </div>
+
+                                    <small>Subject</small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- Subject Code -->
+                        <td>
+
+                            <span class="subject-code" th:text="${subject.subjectCode}">
+                                CS101
+                            </span>
+
+                        </td>
+
+
+                        <!-- Semester -->
+                        <td>
+
+                            <span class="subject-semester" th:text="${subject.semesterNumber}">
+                                1
+                            </span>
+
+                        </td>
+
+
+                        <!-- Actions -->
+                        <td>
+
+                            <div class="subject-actions">
+
+
+                                <!-- Edit -->
+                                <a th:href="@{/subjects/editSubject/{id}(id=${subject.id})}" class="subject-table-action subject-edit-action" title="Edit">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+
+                                <!-- Delete -->
+                                <a th:href="@{/subjects/deleteSubject/{id}(id=${subject.id})}" class="subject-table-action subject-delete-action" title="Delete" onclick="return confirm('Are you sure you want to delete this subject?');">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- No Subjects -->
+                    <tr th:if="${#lists.isEmpty(subjects)}">
+
+                        <td colspan="5" class="empty-subjects">
+
+                            <i class="bi bi-book"></i>
+
+                            <p>No subjects found.</p>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- No Search Result -->
+                    <tr id="noSearchResult" style="display: none;">
+
+                        <td colspan="5" class="empty-subjects">
+
+                            <i class="bi bi-search"></i>
+
+                            <p>No matching subjects found.</p>
+
+                        </td>
+
+                    </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+
+
+    </main>
+
+</div>
+
+
+<!-- Search JavaScript -->
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const searchInput =
+            document.getElementById("subjectSearch");
+
+        const subjectRows =
+            document.querySelectorAll(".subject-row");
+
+        const noSearchResult =
+            document.getElementById("noSearchResult");
+
+
+        searchInput.addEventListener("input", function () {
+
+            const searchValue =
+                searchInput.value.toLowerCase().trim();
+
+            let found = false;
+
+
+            subjectRows.forEach(function (row) {
+
+                const rowText =
+                    row.textContent.toLowerCase();
+
+
+                if (rowText.includes(searchValue)) {
+
+                    row.style.display = "";
+                    found = true;
+
+                } else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+
+            if (searchValue !== "" && !found) {
+
+                noSearchResult.style.display = "";
+
+            } else {
+
+                noSearchResult.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+

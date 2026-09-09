@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #DBDBE5;
+            font-family: Arial, sans-serif;
+            color: #21222D;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 230px;
+            height: 100vh;
+            background: #21222D;
+            padding: 25px 15px;
+        }
+
+        .sidebar-title {
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 35px;
+        }
+
+        .sidebar-title i {
+            color: #ACD1FD;
+            margin-right: 7px;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #DBDBE5;
+            padding: 11px 14px;
+            margin-bottom: 7px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #958CE8;
+            color: white;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        /* Main */
+
+        .main-content {
+            margin-left: 230px;
+            padding: 30px;
+        }
+
+        /* Welcome */
+
+        .welcome-box {
+            background: #21222D;
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .welcome-box h2 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .welcome-box p {
+            color: #DBDBE5;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Cards */
+
+        .dashboard-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+        }
+
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            background: #ACD1FD;
+            color: #21222D;
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card h5 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-card p {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 18px;
+        }
+
+        /* Buttons */
+
+        .btn-purple {
+            display: inline-block;
+            background: #958CE8;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 7px;
+            font-size: 13px;
+            border: none;
+        }
+
+        .btn-purple:hover {
+            background: #8178d5;
+            color: white;
+        }
+
+        /* Information */
+
+        .information-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+        }
+
+        .information-card h5 {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .information-item {
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .information-item strong {
+            display: inline-block;
+            width: 90px;
+            color: #21222D;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+                padding: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <div class="sidebar-title">
+        <i class="bi bi-person-workspace"></i>
+        Teacher Portal
+    </div>
+
+    <a th:href="@{/teacher/dashboard}" class="active">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+    </a>
+
+    <a th:href="@{/teacher/profile}">
+        <i class="bi bi-person-circle"></i>
+        My Profile
+    </a>
+
+    <a th:href="@{/teacher/profile/edit}">
+        <i class="bi bi-pencil-square"></i>
+        Edit Profile
+    </a>
+
+    <a th:href="@{/teacher/subjects}">
+        <i class="bi bi-book-fill"></i>
+        My Subjects
+    </a>
+
+    <form th:action="@{/logout}" method="post" style="display: inline;">
+        <button type="submit" class="sidebar-link">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </button>
+    </form>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+    <!-- Welcome -->
+
+    <div class="welcome-box">
+
+        <h2>
+            Welcome,
+            <span th:text="${teacher.name}">Teacher</span>! </h2>
+
+        <p>
+            Welcome to your teacher dashboard.
+            Manage your profile and assigned subjects from here. </p>
+
+    </div>
+
+
+    <!-- Dashboard Cards -->
+
+    <div class="row g-4">
+
+        <!-- Profile -->
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+
+                <h5>My Profile</h5>
+
+                <p>
+                    View your personal and contact information. </p>
+
+                <a th:href="@{/teacher/profile}" class="btn-purple">
+
+                    View Profile
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Edit Profile -->
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-pencil-square"></i>
+                </div>
+
+                <h5>Edit Profile</h5>
+
+                <p>
+                    Update your personal information. </p>
+
+                <a th:href="@{/teacher/profile/edit}" class="btn-purple">
+
+                    Edit Profile
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Subjects -->
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-book-fill"></i>
+                </div>
+
+                <h5>My Subjects</h5>
+
+                <p>
+                    View the subjects assigned to you. </p>
+
+                <a th:href="@{/teacher/subjects}" class="btn-purple">
+
+                    View Subjects
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Teacher Information -->
+
+    <div class="information-card">
+
+        <h5>
+            <i class="bi bi-person-vcard"></i>
+            Teacher Information </h5>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="information-item">
+                    <strong>Name:</strong>
+                    <span th:text="${teacher.name}"></span>
+                </div>
+
+                <div class="information-item">
+                    <strong>Email:</strong>
+                    <span th:text="${teacher.email}"></span>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="information-item">
+                    <strong>Phone:</strong>
+                    <span th:text="${teacher.phoneNumber}"></span>
+                </div>
+
+                <div class="information-item">
+                    <strong>Address:</strong>
+                    <span th:text="${teacher.address}"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

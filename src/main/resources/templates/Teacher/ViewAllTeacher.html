@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers | Student Management System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/teacher.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<div class="main-wrapper">
+
+    <main class="page-content">
+
+        <!-- Page Header -->
+        <div class="page-heading">
+
+            <div>
+                <h3>
+                    <i class="bi bi-person-workspace"></i>
+                    Teacher List </h3>
+
+                <p>Manage registered teachers</p>
+            </div>
+
+            <a th:href="@{/teacher/addTeacherForm}" class="add-teacher-button">
+                <i class="bi bi-plus-lg"></i>
+                Add Teacher
+            </a>
+
+        </div>
+
+
+        <!-- Teacher List Card -->
+        <div class="teacher-list-card">
+
+            <!-- Card Header -->
+            <div class="teacher-list-header">
+
+                <div>
+                    <h5>All Teachers</h5>
+
+                    <p>
+                        Total Teachers:
+                        <strong th:text="${#lists.size(teachers)}">0</strong>
+                    </p>
+                </div>
+
+                <div class="teacher-search">
+                    <i class="bi bi-search"></i>
+
+                    <input type="text" id="teacherSearch" placeholder="Search teachers...">
+                </div>
+
+            </div>
+
+
+            <!-- Table -->
+            <div class="table-responsive">
+
+                <table class="teacher-list-table" id="teacherTable">
+
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Teacher</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="teacher, stat : ${teachers}" class="teacher-row">
+
+                        <td th:text="${stat.count}">
+                            1
+                        </td>
+
+                        <td>
+                            <div class="teacher-info">
+
+                                <div class="teacher-avatar">
+                                    <span th:text="${#strings.substring(teacher.name, 0, 1).toUpperCase()}">
+                                        T
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <div class="teacher-name" th:text="${teacher.name}">
+                                        Teacher Name
+                                    </div>
+
+                                    <small>
+                                        Teacher
+                                    </small>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td th:text="${teacher.email}">
+                            teacher@email.com
+                        </td>
+
+                        <td th:text="${teacher.phoneNumber}">
+                            9800000000
+                        </td>
+
+                        <td th:text="${teacher.address}">
+                            Kathmandu
+                        </td>
+
+                        <td>
+
+                            <div class="teacher-actions">
+
+                                <a th:href="@{/teacher/view/{id}(id=${teacher.id})}" class="table-action view-action" title="View">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                                <a th:href="@{/teacher/editTeacher/{id}(id=${teacher.id})}" class="table-action edit-action" title="Edit">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+                                <a th:href="@{/teacher/deleteTeacher/{id}(id=${teacher.id})}" class="table-action delete-action" title="Delete" onclick="return confirm('Are you sure you want to delete this teacher?');">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- No Teachers -->
+                    <tr th:if="${#lists.isEmpty(teachers)}">
+
+                        <td colspan="6" class="empty-teachers">
+
+                            <i class="bi bi-person-x"></i>
+
+                            <p>No teachers found.</p>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- No Search Result -->
+                    <tr id="noSearchResult" style="display: none;">
+
+                        <td colspan="6" class="empty-teachers">
+
+                            <i class="bi bi-search"></i>
+
+                            <p>No matching teacher found.</p>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+
+    </main>
+
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const searchInput = document.getElementById("teacherSearch");
+        const teacherRows = document.querySelectorAll(".teacher-row");
+        const noSearchResult = document.getElementById("noSearchResult");
+
+        searchInput.addEventListener("input", function () {
+
+            const searchValue = searchInput.value.toLowerCase().trim();
+
+            let found = false;
+
+            teacherRows.forEach(function (row) {
+
+                const rowText = row.textContent.toLowerCase();
+
+                if (rowText.includes(searchValue)) {
+                    row.style.display = "";
+                    found = true;
+                } else {
+                    row.style.display = "none";
+                }
+
+            });
+
+            if (searchValue !== "" && !found) {
+                noSearchResult.style.display = "";
+            } else {
+                noSearchResult.style.display = "none";
+            }
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,66 +1,397 @@
+```html
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Student Detail Edit</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Student | Student Management System</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+            rel="stylesheet">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" th:href="@{/css/student.css}">
 </head>
+
 <body>
-<div class="container-fluid mt-4">
-    <div class="card">
-        <div class="card-header bg-primary text-white text-center py-3">
-            <h1 class="h3 mb-0">✏️ Student Detail Edit</h1>
+
+<!-- SIDEBAR -->
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+
+<!-- MAIN CONTENT -->
+<div class="main-wrapper">
+
+    <main class="page-content">
+
+        <!-- PAGE HEADING -->
+        <div class="page-heading">
+
+            <div>
+                <h3>
+                    <i class="bi bi-pencil-square"></i>
+                    Edit Student
+                </h3>
+
+                <p>
+                    Update the student's information.
+                </p>
+            </div>
+
+            <!-- BACK BUTTON -->
+            <a th:href="@{/students/studentList}"
+                    class="back-button">
+
+                <i class="bi bi-arrow-left"></i>
+                Back to Students
+
+            </a>
+
         </div>
-        <div class="card-body">
-            <form action="/std/update" method="post" th:object="${stdedit}">
-                <div class="mb-3 row align-items-center">
-                    <label for="name" class="col-sm-2 col-form-label fw-bold">Name:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter Name">
-                    </div>
+
+
+        <!-- EDIT FORM CARD -->
+        <div class="student-form-card">
+
+            <!-- CARD HEADER -->
+            <div class="student-form-header">
+
+                <div class="form-header-icon">
+                    <i class="bi bi-pencil-square"></i>
                 </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="email" class="col-sm-2 col-form-label fw-bold">Email:</label>
-                    <div class="col-sm-10">
-                        <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Enter Email">
-                    </div>
+
+                <div>
+                    <h5>Student Information</h5>
+
+                    <p>
+                        Update the student's basic information
+                    </p>
                 </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="address" class="col-sm-2 col-form-label fw-bold">Address:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="Enter Address">
+
+            </div>
+
+
+            <!-- CARD BODY -->
+            <div class="student-form-body">
+
+                <form th:action="@{/students/updateStudent}"
+                        th:object="${student}"
+                        method="post">
+
+                    <!-- STUDENT ID -->
+                    <input type="hidden"
+                            th:field="*{id}">
+
+
+                    <!-- PERSONAL INFORMATION -->
+                    <div class="form-section-title">
+
+                        <div class="section-icon">
+                            <i class="bi bi-person-vcard"></i>
+                        </div>
+
+                        <div>
+                            <h5>Personal Information</h5>
+
+                            <p>
+                                Update the student's details
+                            </p>
+                        </div>
+
                     </div>
-                </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="mathMarks" class="col-sm-2 col-form-label fw-bold">Math Marks:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="mathMarks" th:field="*{mathMarks}" class="form-control" placeholder="Enter Math Marks">
+
+
+                    <div class="row g-4">
+
+                        <!-- STUDENT CODE -->
+                        <div class="col-md-6">
+
+                            <label for="stdCode"
+                                    class="custom-label">
+
+                                Student Code
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-person-badge"></i>
+
+                                <input type="text"
+                                        id="stdCode"
+                                        th:field="*{stdCode}"
+                                        placeholder="Enter student code"
+                                        required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- NAME -->
+                        <div class="col-md-6">
+
+                            <label for="name"
+                                    class="custom-label">
+
+                                Student Name
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-person"></i>
+
+                                <input type="text"
+                                        id="name"
+                                        th:field="*{name}"
+                                        placeholder="Enter student's full name"
+                                        required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+
+                            <label for="email"
+                                    class="custom-label">
+
+                                Email Address
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-envelope"></i>
+
+                                <input type="email"
+                                        id="email"
+                                        th:field="*{email}"
+                                        placeholder="student@example.com"
+                                        required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+                        <div class="col-md-6">
+
+                            <label for="phoneNumber"
+                                    class="custom-label">
+
+                                Phone Number
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-telephone"></i>
+
+                                <input type="tel"
+                                        id="phoneNumber"
+                                        th:field="*{phoneNumber}"
+                                        placeholder="98XXXXXXXX"
+                                        required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+                        <div class="col-md-6">
+
+                            <label for="address"
+                                    class="custom-label">
+
+                                Address
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <input type="text"
+                                        id="address"
+                                        th:field="*{address}"
+                                        placeholder="Enter student's address">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- GENDER -->
+                        <div class="col-md-6">
+
+                            <label for="gender"
+                                    class="custom-label">
+
+                                Gender
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-gender-ambiguous"></i>
+
+                                <select id="gender"
+                                        th:field="*{gender}"
+                                        required>
+
+                                    <option value="">
+                                        Select Gender
+                                    </option>
+
+                                    <option value="MALE">
+                                        Male
+                                    </option>
+
+                                    <option value="FEMALE">
+                                        Female
+                                    </option>
+
+                                    <option value="OTHER">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- COURSE -->
+                        <div class="col-md-6">
+
+                            <label for="course"
+                                    class="custom-label">
+
+                                Course
+                                <span>*</span>
+
+                            </label>
+
+                            <div class="custom-input-group">
+
+                                <i class="bi bi-mortarboard-fill"></i>
+
+                                <select id="course"
+                                        th:field="*{course}"
+                                        required>
+
+                                    <option value="">
+                                        Select Course
+                                    </option>
+
+                                    <option value="BBA">
+                                        BBA - Bachelor of Business Administration
+                                    </option>
+
+                                    <option value="BCA">
+                                        BCA - Bachelor of Computer Application
+                                    </option>
+
+                                    <option value="BIM">
+                                        BIM - Bachelor of Information Management
+                                    </option>
+
+                                    <option value="BSc CSIT">
+                                        BSc CSIT - Bachelor of Science in Computer Science and Information Technology
+                                    </option>
+
+                                    <option value="BIT">
+                                        BIT - Bachelor of Information Technology
+                                    </option>
+
+                                    <option value="BBM">
+                                        BBM - Bachelor of Business Management
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="socialMarks" class="col-sm-2 col-form-label fw-bold">Social Marks:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="socialMarks" th:field="*{socialMarks}" class="form-control" placeholder="Enter Social Marks">
+
+
+                    <!-- FORM ACTIONS -->
+                    <div class="form-actions">
+
+                        <a th:href="@{/students/studentList}"
+                                class="reset-button">
+
+                            <i class="bi bi-x-circle"></i>
+                            Cancel
+
+                        </a>
+
+
+                        <button type="submit"
+                                class="save-button">
+
+                            <i class="bi bi-check-circle"></i>
+                            Update Student
+
+                        </button>
+
                     </div>
-                </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="totalMarks" class="col-sm-2 col-form-label fw-bold">Total Marks:</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="totalMarks" th:field="*{totalMarks}" class="form-control" placeholder="Enter Total Marks">
-                    </div>
-                </div>
-                <input type="hidden" th:field="*{id}">
-                <div class="mb-3 row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-8">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
+
+                </form>
+
+            </div>
+
         </div>
-        <div class="card-footer"></div>
-    </div>
+
+
+        <!-- INFORMATION -->
+        <div class="form-note">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+            <span>
+                Fields marked with <strong>*</strong> are required.
+            </span>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+
+    </main>
+
 </div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
+```

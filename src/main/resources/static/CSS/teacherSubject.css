@@ -1,0 +1,386 @@
+/* =========================
+   TEACHER SUBJECT
+========================= */
+
+/* BACK BUTTON */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #eee9e9;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #957979;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #eee9e9;
+    color: #de7573;
+}
+
+
+/* =========================
+   ADD SUBJECT
+========================= */
+
+.teacher-subject-add-card {
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #eee9e9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.teacher-subject-card-header {
+    padding: 17px 20px;
+    border-bottom: 1px solid #eee9e9;
+    background: #ffffff;
+}
+
+.teacher-subject-card-header h5 {
+    margin: 0 0 3px;
+    color: #3f3535;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.teacher-subject-card-header h5 i {
+    margin-right: 6px;
+    color: #de7573;
+}
+
+.teacher-subject-card-header p {
+    margin: 0;
+    color: #957979;
+    font-size: 10px;
+}
+
+.teacher-subject-add-body {
+    padding: 20px;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+.custom-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #5c5050;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.custom-label span {
+    color: #de7573;
+}
+
+
+/* =========================
+   SELECT
+========================= */
+
+.custom-input-group {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee9e9;
+    border-radius: 7px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: 0.2s ease;
+}
+
+.custom-input-group > i {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #eee9e9;
+    color: #957979;
+    font-size: 14px;
+}
+
+.custom-input-group select {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0 11px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    color: #3f3535;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.custom-input-group:focus-within {
+    border-color: #de7573;
+    box-shadow: 0 0 0 2px rgba(222, 117, 115, 0.08);
+}
+
+.custom-input-group:focus-within > i {
+    color: #de7573;
+}
+
+
+/* =========================
+   ASSIGN BUTTON
+========================= */
+
+.assign-button {
+    width: 100%;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid #de7573;
+    border-radius: 7px;
+    background: #de7573;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.assign-button:hover {
+    background: #c96361;
+    border-color: #c96361;
+}
+
+
+/* =========================
+   ASSIGNED SUBJECTS
+========================= */
+
+.teacher-subject-list-card {
+    background: #ffffff;
+    border: 1px solid #eee9e9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.teacher-subject-list-header {
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee9e9;
+}
+
+.teacher-subject-list-header h5 {
+    margin: 0 0 3px;
+    color: #3f3535;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.teacher-subject-list-header p {
+    margin: 0;
+    color: #957979;
+    font-size: 10px;
+}
+
+.teacher-subject-list-header strong {
+    color: #de7573;
+    font-weight: 600;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.teacher-subject-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.teacher-subject-table thead {
+    background: #eee9e9;
+}
+
+.teacher-subject-table th {
+    padding: 11px 15px;
+    color: #957979;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border: none;
+}
+
+.teacher-subject-table td {
+    padding: 11px 15px;
+    color: #5c5050;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee9e9;
+}
+
+.teacher-subject-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.teacher-subject-table tbody tr:hover {
+    background: #faf7f7;
+}
+
+
+/* =========================
+   SUBJECT INFO
+========================= */
+
+.subject-info {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.subject-avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eee9e9;
+    color: #de7573;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.subject-name {
+    color: #3f3535;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.subject-info small {
+    display: block;
+    margin-top: 2px;
+    color: #957979;
+    font-size: 9px;
+}
+
+
+/* =========================
+   SUBJECT CODE
+========================= */
+
+.subject-code {
+    color: #5c5050;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.subject-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.subject-actions .table-action {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee9e9;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #957979;
+    text-decoration: none;
+    font-size: 11px;
+    transition: 0.2s ease;
+}
+
+.subject-actions .edit-action:hover,
+.subject-actions .delete-action:hover {
+    background: #de7573;
+    border-color: #de7573;
+    color: #ffffff;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-teacher-subjects {
+    padding: 40px 20px !important;
+    text-align: center;
+    color: #957979;
+}
+
+.empty-teacher-subjects i {
+    font-size: 28px;
+    color: #eee9e9;
+}
+
+.empty-teacher-subjects p {
+    margin: 8px 0 0;
+    font-size: 11px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .teacher-subject-add-body {
+        padding: 18px;
+    }
+
+    .teacher-subject-table {
+        min-width: 750px;
+    }
+
+    .teacher-subject-list-header {
+        padding: 15px 18px;
+    }
+
+}
+
+.page-heading {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 22px;
+}
+
+.heading-right {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sidebar">
+
+    <div class="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="logo-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+
+            <div>
+                <h5>EduManage</h5>
+                <small>Admin Panel</small>
+            </div>
+        </div>
+
+
+        <!-- Navigation -->
+        <div class="sidebar-menu">
+
+            <p class="menu-title">MAIN</p>
+
+            <a th:href="@{/admin/dashboard}" class="menu-item">
+
+                <i class="bi bi-grid-fill"></i>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <p class="menu-title">STUDENTS</p>
+
+            <a th:href="@{/students/studentList}" class="menu-item">
+
+                <i class="bi bi-people-fill"></i>
+                <span>All Students</span>
+
+            </a>
+
+            <a th:href="@{/students/add}" class="menu-item">
+
+                <i class="bi bi-person-plus-fill"></i>
+                <span>Add Student</span>
+
+            </a>
+
+
+            <p class="menu-title">MANAGEMENT</p>
+
+            <a th:href="@{/teacher/teacherList}" class="menu-item">
+
+                <i class="bi bi-person-workspace"></i>
+                <span>Teachers</span>
+
+            </a>
+
+            <a th:href="@{/courses/courseList}" class="menu-item">
+
+                <i class="bi bi-book-fill"></i>
+                <span>Courses</span>
+
+            </a>
+
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit" class="logout-button"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</html>
